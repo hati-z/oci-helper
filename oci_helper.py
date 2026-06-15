@@ -487,6 +487,8 @@ def run_loop(args: argparse.Namespace) -> None:
         )
 
     print("\nVM Configuration Loaded:")
+    if os.environ.get("OCI_SLEEP_PREVENTED") == "1":
+        print("  System Sleep:       PREVENTED (☕ caffeinate active)")
     print(f"  Shape:              {config_data['shape']}")
     if config_data.get("shape_config"):
         print(f"  CPU/Memory:         {config_data['shape_config']['ocpus']} OCPUs / {config_data['shape_config']['memory_in_gbs']} GB RAM")
@@ -620,12 +622,19 @@ def run_start(args: argparse.Namespace) -> None:
         
     try:
         log_file = open(log_path, "a")
+        
+        # Prepare environment variables to indicate sleep prevention status in logs
+        env = os.environ.copy()
+        if sys.platform == "darwin":
+            env["OCI_SLEEP_PREVENTED"] = "1"
+            
         process = subprocess.Popen(
             cmd,
             stdout=log_file,
             stderr=log_file,
             stdin=subprocess.DEVNULL,
-            start_new_session=True
+            start_new_session=True,
+            env=env
         )
         
         with open(pid_path, "w") as f:
