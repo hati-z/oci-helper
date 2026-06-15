@@ -1,0 +1,20 @@
+# OCI config and state files (sensitive/temporary)
+config.json
+oci_helper.pid
+oci_helper.log
+
+# Python bytecode and cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
