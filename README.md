@@ -1,6 +1,6 @@
 # OCI Always Free VM Capacity Grabber & Network Automator
 
-This utility helps you automatically claim and provision Oracle Cloud Infrastructure (OCI) "Always Free" instances (specifically the high-performance Ampere ARM `VM.Standard.A1.Flex` shape, featuring 4 OCPUs and 24 GB of RAM) by continuously retrying launch requests across multiple availability domains until capacity becomes available.
+This utility helps you automatically claim and provision Oracle Cloud Infrastructure (OCI) "Always Free" instances (specifically the high-performance Ampere ARM `VM.Standard.A1.Flex` shape, featuring 2 OCPUs and 12 GB of RAM for 24/7 instances) by continuously retrying launch requests across multiple availability domains until capacity becomes available.
 
 It is designed to run in the background (as a daemon process) on your system, and it is fully optimized to prepare and provision the VM specifically for hosting **OpenClaw** server instances.
 

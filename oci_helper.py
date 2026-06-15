@@ -215,7 +215,7 @@ def run_configure(args: argparse.Namespace) -> None:
 
     # 3. Shape selection
     shape_options = [
-        {"name": "VM.Standard.A1.Flex (Ampere ARM - Always Free up to 4 OCPUs, 24GB)", "shape": "VM.Standard.A1.Flex"},
+        {"name": "VM.Standard.A1.Flex (Ampere ARM - Always Free up to 2 OCPUs, 12GB for 24/7 instances)", "shape": "VM.Standard.A1.Flex"},
         {"name": "VM.Standard.E2.1.Micro (AMD x86 - Always Free 1 OCPU, 1GB)", "shape": "VM.Standard.E2.1.Micro"},
         {"name": "Enter Custom Shape Name", "shape": "custom"}
     ]
@@ -237,13 +237,13 @@ def run_configure(args: argparse.Namespace) -> None:
         print(f"\nConfiguring Flex Shape options for {shape}:")
         while True:
             try:
-                ocpus = float(input("Number of OCPUs (default 4.0 for A1 Always Free): ").strip() or "4.0")
+                ocpus = float(input("Number of OCPUs (default 2.0 for A1 Always Free): ").strip() or "2.0")
                 break
             except ValueError:
                 print("Please enter a valid decimal number.")
         while True:
             try:
-                memory = float(input("Memory in GBs (default 24.0 for A1 Always Free): ").strip() or "24.0")
+                memory = float(input("Memory in GBs (default 12.0 for A1 Always Free): ").strip() or "12.0")
                 break
             except ValueError:
                 print("Please enter a valid decimal number.")
