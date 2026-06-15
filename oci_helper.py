@@ -631,6 +631,20 @@ def run_start(args: argparse.Namespace) -> None:
         with open(pid_path, "w") as f:
             f.write(str(process.pid))
             
+        # On macOS, start a helper caffeinate process tied to the daemon's PID to prevent system sleep
+        if sys.platform == "darwin":
+            try:
+                subprocess.Popen(
+                    ["caffeinate", "-w", str(process.pid)],
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                    stdin=subprocess.DEVNULL,
+                    start_new_session=True
+                )
+                print("☕ Caffeinate active: Preventing system sleep while retry loop is running.")
+            except Exception:
+                pass
+            
         print(f"✅ Started background retry process with PID {process.pid}")
         print(f"📝 Logs are being written to: {log_path}")
         print("Check status with: python3 oci_helper.py status")
